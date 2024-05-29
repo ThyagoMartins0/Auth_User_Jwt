@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resetar Senha</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2><i class="fas fa-envelope"></i> Resetar Senha</h2>
+            <form method="POST" action="/send-reset-link">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit" class="button">Enviar Link de Redefinição</button>
+            </form>
+            <p class="signup-link">Não tem uma conta? <a href="login.html">Acesse</a></p>
+        </div>
+    </div>
+</body>
+</html>

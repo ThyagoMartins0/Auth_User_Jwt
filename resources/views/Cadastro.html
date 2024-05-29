@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="../css/Cadastro.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2><i class="fas fa-user-plus"></i> Cadastro</h2>
+            <form>
+                <div class="input-group">
+                    <label for="first-name">Nome</label>
+                    <input type="text" id="first-name" name="first-name" required>
+                </div>
+               
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" required>
+                    <button type="button" onclick="togglePasswordVisibility('password')">Mostrar</button>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Repetir Senha</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                    <button type="button" onclick="togglePasswordVisibility('confirm-password')">Mostrar</button>
+                </div>
+                <button type="submit" class="button">Cadastrar</button>
+            </form>
+            <p class="signup-link">Não tem uma conta? <a href="login.html">Acesse</a></p>
+        </div>
+    </div>
+</body>
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var name = document.getElementById('first-name').value;
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var passwordConfirmation = document.getElementById('confirm-password').value;
+
+        fetch('http://localhost:8000/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password,
+                password_confirmation: passwordConfirmation,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Aqui você pode redirecionar o usuário, mostrar uma mensagem de sucesso, etc.
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Aqui você pode mostrar uma mensagem de erro ao usuário
+        });
+    });
+    function togglePasswordVisibility(id) {
+    var passwordInput = document.getElementById(id);
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+}
+</script>
+</html>
